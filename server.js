@@ -12,7 +12,7 @@ function onRequest (req, res) {
     return
   }
 
-  if (Math.random() > 0.999) {
+  if (Math.random() > 0.9995) {
     throw new Error('Uncaught Exception!')
   } else if (Math.random() > 0.95 && Math.random() < 0.99) {
     res.writeHead(Math.random() > 0.8 ? 500 : 404, { 'Content-Type': 'text/html' })
