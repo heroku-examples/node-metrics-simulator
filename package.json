@@ -1,0 +1,10 @@
+{
+  "name": "node-metrics-simulator",
+  "version": "1.0.0",
+  "description": "Simulate data for metrics dashboard",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Julián Duque <jduque@salesforce.com>",
+  "license": "MIT"
+}
