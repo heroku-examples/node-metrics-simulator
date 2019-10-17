@@ -3,17 +3,25 @@
 const http = require('http')
 const server = http.createServer(onRequest)
 const port = +process.env.PORT || 5000
+const loaderVerification = process.env.LOADER_IO || 'loader'
 
 function onRequest (req, res) {
-  if (Math.random() > 0.99) {
+  if (req.url === `/${loaderVerification}.txt`) {
+    res.writeHead(200, { 'Content-Type': 'application/text' })
+    res.end(loaderVerification)
+    return
+  }
+
+  if (Math.random() > 0.999) {
     throw new Error('Uncaught Exception!')
-  } else if (Math.random() > 0.8 && Math.random() < 0.99) {
-    res.status(Math.random() > 0.7 ? 404 : 500)
-    res.send('not found or error')
+  } else if (Math.random() > 0.95 && Math.random() < 0.99) {
+    res.writeHead(Math.random() > 0.8 ? 500 : 404, { 'Content-Type': 'text/html' })
+    res.end('not found or error')
   } else {
-    const time = Math.random() * 500
+    const time = Math.random() * 100
     blockCpuFor(time).then(() => {
-      res.send('ok')
+      res.writeHead(200, { 'Content-Type': 'text/html' })
+      res.end('ok')
     })
   }
 }
